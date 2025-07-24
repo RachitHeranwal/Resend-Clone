@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Refactored Resend‑Style Navbar</title>
+    <style>
+        /* ===== Reset ===== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+        }
+
+        /* ===== Navbar Container ===== */
+        .navbar {
+            margin: 0px 150px;
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        /* ===== Main Menu ===== */
+        .main-menu {
+            list-style: none;
+            display: flex;
+            gap: 24px;
+        }
+
+        .main-menu li {
+            position: relative;
+        }
+
+        .main-menu a {
+            display: inline-block;
+            padding: 8px;
+            color: #ccc;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .main-menu a:hover,
+        .main-menu a:focus {
+            color: #fff;
+            outline: none;
+        }
+
+        /* ===== Dropdown ===== */
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            display: flex;
+            gap: 32px;
+            padding: 24px;
+            background: black;
+            border-radius: 12px;
+            grid-template-rows: repeat(2, 100px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border-color: #222;
+            border-style: solid;
+            border-width: 1px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown:focus-within .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .left-menu {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .left-menu a {
+            color: #ccc;
+            padding: 4px 0;
+            transition: color 0.2s ease;
+        }
+
+        .left-menu a:hover,
+        .left-menu a:focus {
+            color: #fff;
+            outline: none;
+        }
+
+        .right-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .feature-box {
+            background: radial-gradient(circle at top left, #222 0%, #111 100%);
+            padding: 16px;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 180px;
+        }
+
+        .feature-box:hover,
+        .feature-box:focus {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            outline: none;
+        }
+
+        /* ===== Buttons ===== */
+        .btn {
+            display: inline-block;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        .btn:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
+        }
+
+        .btn-signin {
+            background: transparent;
+            color: #888;
+            border: 2px solid transparent;
+            padding: 6px 12px;
+        }
+
+        .btn-signin:hover {
+            color: #fff;
+        }
+
+        .btn-get-started {
+            background: #fff;
+            color: #000;
+            padding: 10px 13px;
+            background-color: rgb(41, 39, 39);
+            color: white;
+            border-style: solid;
+            border-width: 2px;
+            border-color: #4e4d4d;
+            border-radius: 14px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-get-started:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 8px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .dev-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 0px 140px;
+            background-color: rgba(0, 0, 0, 0.04);
+            min-height: 600px;
+        }
+
+        .left-side {
+            padding-top: 190px;
+            padding-left: 60px;
+        }
+
+        .heading {
+            font-size: 5.5rem;
+            font-weight: 100;
+            line-height: 96px;
+            font-family: domaine;
+            padding-bottom: 12px;
+            padding-left: 5px;
+        }
+
+        .dev-container p {
+            color: gray;
+            font-family: Inter Variable;
+            line-height: 1.5;
+            font-size: 1.125rem;
+            font-weight: 570;
+        }
+
+        .dev-container .actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .dev-container .btn-get-started {
+            font-size: 16px;
+            padding: 13px 20px;
+            font-weight: 600;
+            border-width: 0px;
+            transition: all 0.05s ease-in-out, box-shadow 0.2s ease;
+        }
+
+        .dev-container .btn-get-started:hover {
+            color: black;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 8px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .dev-container .btn-signin {
+            color: rgb(104, 102, 102);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .right-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Rubik's Cube Styles */
+        .scene {
+            width: 200px;
+            height: 200px;
+            perspective: 800px;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 15s linear infinite;
+        }
+
+        .face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid #222;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 2px;
+            padding: 2px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .square {
+            border: 1px solid #222;
+            border-radius: 2px;
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Face colors */
+        .front {
+            transform: rotateY(0deg) translateZ(100px);
+            background: #fff;
+        }
+
+        .front .square {
+            background: #fff;
+        }
+
+        .back {
+            transform: rotateY(180deg) translateZ(100px);
+            background: #ffeb3b;
+        }
+
+        .back .square {
+            background: #ffeb3b;
+        }
+
+        .right {
+            transform: rotateY(90deg) translateZ(100px);
+            background: #f44336;
+        }
+
+        .right .square {
+            background: #f44336;
+        }
+
+        .left {
+            transform: rotateY(-90deg) translateZ(100px);
+            background: #ff9800;
+        }
+
+        .left .square {
+            background: #ff9800;
+        }
+
+        .top {
+            transform: rotateX(90deg) translateZ(100px);
+            background: #4caf50;
+        }
+
+        .top .square {
+            background: #4caf50;
+        }
+
+        .bottom {
+            transform: rotateX(-90deg) translateZ(100px);
+            background: #2196f3;
+        }
+
+        .bottom .square {
+            background: #2196f3;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate3d(1, 1, 1, 0deg);
+            }
+
+            100% {
+                transform: rotate3d(1, 1, 1, 360deg);
+            }
+        }
+
+        /* ===== Responsive (optional) ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 16px;
+                padding: 16px;
+            }
+
+            .main-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .dropdown-content {
+                position: static;
+                flex-direction: column;
+                opacity: 1;
+                visibility: visible;
+                box-shadow: none;
+                background: transparent;
+                padding: 0;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">Resend</div>
+        <ul class="main-menu">
+            <li class="dropdown">
+                <a href="#" aria-haspopup="true">Features ▾</a>
+                <div class="dropdown-content">
+                    <div class="left-menu">
+                        <a href="#">Email API</a>
+                        <a href="#">SMTP Service</a>
+                        <a href="#">Audiences</a>
+                        <a href="#">Broadcasts</a>
+                    </div>
+                    <div class="right-menu">
+                        <div class="feature-box" tabindex="0">Transactional Emails</div>
+                        <div class="feature-box" tabindex="0">Marketing Emails</div>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" aria-haspopup="true">Company ▾</a>
+                <div class="dropdown-content">
+                    <div class="left-menu">
+                        <a href="#">About</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Customers</a>
+                        <a href="#">Humans</a>
+                    </div>
+                    <div class="right-menu">
+                        <div class="feature-box" tabindex="0">Handbook</div>
+                        <div class="feature-box" tabindex="0">Philosophy</div>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" aria-haspopup="true">Resources ▾</a>
+                <div class="dropdown-content">
+                    <div class="left-menu">
+                        <a href="#">Changelog</a>
+                        <a href="#">Enterprise</a>
+                        <a href="#">Security</a>
+                        <a href="#">SOC 2</a>
+                        <a href="#">GDPR</a>
+                    </div>
+                    <div class="right-menu">
+                        <div class="feature-box" tabindex="0">Custom Unsubscribe</div>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" aria-haspopup="true">Help ▾</a>
+                <div class="dropdown-content">
+                    <div class="left-menu">
+                        <a href="#">Contact</a>
+                        <a href="#">Support</a>
+                        <a href="#">Status</a>
+                        <a href="#">Migrate</a>
+                    </div>
+                    <div class="right-menu">
+                        <div class="feature-box" tabindex="0">Knowledge Base</div>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" aria-haspopup="true">Docs ▾</a>
+                <div class="dropdown-content">
+                    <div class="left-menu">
+                        <a href="#">Getting Started</a>
+                        <a href="#">API Reference</a>
+                        <a href="#">Integrations</a>
+                        <a href="#">Examples</a>
+                        <a href="#">SDKs</a>
+                    </div>
+                    <div class="right-menu">
+                        <div class="feature-box" tabindex="0">Quickstart</div>
+                        <div class="feature-box" tabindex="0">API Keys</div>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#">Pricing</a></li>
+        </ul>
+        <div class="actions">
+            <button class="btn btn-signin">Sign In</button>
+            <button class="btn btn-get-started">Get Started</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="dev-container">
+            <div class="left-side">
+                <h1 class="heading">Email for developers</h1>
+                <p class="para1">The best way to reach humans instead of spam folders.</p>
+                <p class="para2">Deliver transactional and marketing emails at scale.</p>
+                <div class="actions">
+                    <button class="btn btn-get-started">Get Started</button>
+                    <button class="btn btn-signin">Documentation</button>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="scene">
+                    <div class="cube">
+                        <div class="face front">
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                        </div>
+                        <div class="face back">
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                        </div>
+                        <div class="face right">
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                        </div>
+                        <div class="face left">
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                        </div>
+                        <div class="face top">
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                        </div>
+                        <div class="face bottom">
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
