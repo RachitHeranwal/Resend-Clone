@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Refactored Resend‑Style Navbar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* ===== Reset ===== */
         *,
@@ -20,6 +21,7 @@
             color: #fff;
             font-family: Arial, sans-serif;
             line-height: 1.5;
+            height: 2000px;
         }
 
         /* ===== Navbar Container ===== */
@@ -29,6 +31,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            background: #000;
+            z-index: 2000;
         }
 
         .logo {
@@ -337,6 +343,128 @@
             }
         }
 
+        .dev-container1 {
+            display: grid;
+            grid-template-rows: 88px 100px 110px 645px;
+            background-color: rgba(0, 0, 0, 0.04);
+            margin: 0px 140px;
+            min-height: 600px;
+        }
+
+        .dev-container1 h1 {
+            color: #d8cdcd;
+            display: flex;
+            justify-content: center;
+            font-size: 3.7rem;
+            font-family: aBCFavorit;
+            font-weight: 400;
+        }
+
+        .dev-container1 p {
+            display: inline-block;
+            justify-self: center;
+            text-align: center;
+            width: 51%;
+            color: gray;
+            font-size: 1.15rem;
+        }
+
+        .dev-container1 .intgrate-icons {
+            display: flex;
+            justify-self: center;
+            margin-left: 100px;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            background: #000;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .intgrate-icon {
+            width: 40px;
+            height: 40px;
+            border-color: white;
+        }
+
+        .dev-container1 .intgrate-icons i {
+            color: #fff;
+            font-size: 28px;
+            padding: 15px 25px;
+            border: 1.5px solid #333;
+            border-radius: 18px;
+            background: transparent;
+            margin: 0 20px;
+        }
+
+        .dev-container1 .intgrate-icons .active {
+            background: #f1c40f;
+            color: #000;
+        }
+
+        .dev-container1 .lang-word {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+            color: #575454;
+            transform: color 0.1s ease-in-out;
+            cursor: pointer;
+        }
+
+        .lang-word:hover {
+            color: white;
+        }
+
+        .dev-container1 .the-box {
+            margin-top: 30px;
+            margin-left: 100px;
+            flex: flex;
+            flex-direction: row;
+            background-color: transparent;
+            border: 1.5px solid #1c1b1b;
+            border-radius: 20px;
+            transform: color 0.2s ease-in-out;
+        }
+
+        .dev-container1 .box-icons {
+            display: flex;
+            flex-direction: row;
+            padding-left: 20px;
+            gap: 50px;
+            border-width: 1px;
+            margin: 15px 20px;
+            margin-bottom: 40px;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .dev-container1 .box-words {
+            color: #888;
+            transform: color 0.1s ease-in-out;
+        }
+
+        .dev-container1 .box-words:hover {
+            color: white;
+        }
+
+        .dev-container1 .box-code p {
+            display: flex;
+            justify-content: flex-start;
+            padding-left: 15px;
+            font-size: 15.5px;
+        }
+
+        .dev-container1 .btn-two {
+            margin-top: 80px;
+            padding-left: 30px;
+            font-size: 13px;
+            display: flex;
+            gap: 40px;
+            color: #c1bbbb;
+            font-weight: 400;
+        }
+
         /* ===== Responsive (optional) ===== */
         @media (max-width: 768px) {
             .navbar {
@@ -538,6 +666,88 @@
             </div>
         </div>
     </main>
+
+    <Intgrate>
+        <div class="dev-container1">
+            <h1>Integrate <span style="color: rgb(209, 154, 81); margin-left: 10px;"> this afternoon</span></h1>
+            <p>A simple, elegant interface so you can start sending emails in minutes. It fits right into your code with
+                SDKs for your favorite programming languages.</p>
+            <div class="intgrate-icons">
+                <div class="lang-word">
+                    <i class="fab fa-js icon active"></i>
+                    <span>Javascript</span>
+                </div>
+                <div class="lang-word">
+                    <i class="fas fa-bolt icon"></i>
+                    <span>Ruby</span>
+                </div>
+                <div class="lang-word">
+                    <i class="fab fa-python icon"></i>
+                    <span>Python</span>
+                </div>
+                <div class="lang-word">
+                    <i class="fab fa-php icon"></i>
+                    <span>PHP</span>
+                </div>
+                <div class="lang-word">
+                    <i class="fas fa-g icon"></i>
+                    <span>Go</span>
+                </div>
+                <div class="lang-word">
+                    <i class="fab fa-rust icon"></i>
+                    <span>Rust</span>
+                </div>
+                <div class="lang-word">
+                    <i class="fab fa-java icon"></i>
+                    <span>Java</span>
+                </div>
+                <div class="lang-word">
+                    <i class="fas fa-envelope icon"></i>
+                    <span>SMTP</span>
+                </div>
+            </div>
+            <div class="the-box">
+                <div class="box-icons">
+                    <span class="box-words">Node.js</span>
+                    <span class="box-words">Next.js</span>
+                    <span class="box-words">Remix</span>
+                    <span class="box-words">Nuxt</span>
+                    <span class="box-words">Express</span>
+                    <span class="box-words">Hono</span>
+                    <span class="box-words">Redwood</span>
+                    <span class="box-words">Bun</span>
+                    <span class="box-words">Astro</span>
+                </div>
+                <div class="box-code">
+                    <p>1 <span style="padding-left: 15px;"> import { <span style="color: white;">Resend</span> } from
+                            'resend';</span></p>
+                    <p>2 </p>
+                    <p>3 <span style="padding-left: 15px;"> const <span style="color: white;">resend </span> = new
+                    <span style="color: white;">Resend('re_xxxxxxxxx');</span></span></p>
+                    <p>4 </p>
+                    <p>5 <span style="padding-left: 15px;">(async function() { </span></p>
+                    <p>6 <span style="padding-left: 15px;">const { <span style="color: white;">data, error</span> } = await <span style="color: white;">resend.emails.send</span>({</span>
+                    </p>
+                    <p>7 <span style="padding-left: 15px;">from: 'onboarding@resend.dev',</span></p>
+                    <p>8 <span style="padding-left: 15px;">to: 'delivered@resend.dev',</span></p>
+                    <p>9 <span style="padding-left: 15px;">subject: 'Hello World',</span></p>
+                    <p>10 <span style="padding-left: 15px;">html: '<strong>it works!</strong>'</span></p>
+                    <p>11 <span style="padding-left: 15px;">});</p>
+                    <p>12 <span style="padding-left: 15px;">import { Resend } from 'resend';</span></p>
+                    <p>13 <span style="padding-left: 15px;">if (error) {</p>
+                    <p>14 <span style="padding-left: 15px;">return console.log(error);</span></p>
+                    <p>15 <span style="padding-left: 15px;">}</span></p>
+                    <p>16 <span style="padding-left: 15px;"></span></p>
+                    <p>17 <span style="padding-left: 15px;">console.log(data);p></span>
+                    <p>18 <span style="padding-left: 15px;">})();</span></p>
+                </div>
+                <div class="btn-two">
+                    <span>View on GitHub</span>
+                    <span>Download ZIP</span>
+                </div>
+            </div>
+        </div>
+    </Intgrate>
 </body>
 
 </html>
