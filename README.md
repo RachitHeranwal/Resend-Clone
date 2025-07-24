@@ -24,7 +24,6 @@ Open `index.html` in your browser to see the live demo.
 ## Screenshot
 
 The website features a split layout with:
-
 - Left side: Hero section with "Email for developers" heading
 - Right side: Animated 3D Rubik's cube
 - Top: Navigation bar with dropdown menus
@@ -37,4 +36,4 @@ The website features a split layout with:
 
 ---
 
-_This is a clone project for educational purposes._
+*This is a clone project for educational purposes.*
