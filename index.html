@@ -1,13 +1,30 @@
+<!-- ====== Document Setup ====== -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <!-- Character encoding -->
     <meta charset="UTF-8" />
+    <!-- Responsive viewport settings -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Page title -->
     <title>Refactored Resend‑Style Navbar</title>
+    <!-- Icon library (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* ===== Reset ===== */
+        /**
+         * ===== CSS Structure Overview =====
+         * 1. Reset & Base Styles
+         * 2. Navbar & Navigation
+         * 3. Dropdown Menus
+         * 4. Button Styles
+         * 5. Hero Section (dev-container)
+         * 6. Integration Section (dev-container1)
+         * 7. Code Display & Switcher
+         * 8. Responsive Design
+         */
+
+        /* ===== Reset & Base Styles ===== */
         *,
         *::before,
         *::after {
@@ -24,7 +41,10 @@
             height: 2000px;
         }
 
-        /* ===== Navbar Container ===== */
+        /* ===== Navbar Container =====
+         * Sticky navigation bar with logo, menu items, and action buttons
+         * Uses flexbox for layout and contains dropdown menus
+         */
         .navbar {
             margin: 0px 150px;
             padding-top: 10px;
@@ -68,7 +88,11 @@
             outline: none;
         }
 
-        /* ===== Dropdown ===== */
+        /* ===== Dropdown Menu System =====
+         * Hidden by default, shown on hover/focus
+         * Contains two sections: left-menu (links) and right-menu (feature boxes)
+         * Uses transitions for smooth appearance
+         */
         .dropdown-content {
             position: absolute;
             top: 100%;
@@ -134,7 +158,11 @@
             outline: none;
         }
 
-        /* ===== Buttons ===== */
+        /* ===== Global Button Styles =====
+         * Two main button types: btn-signin (ghost) and btn-get-started (solid)
+         * Includes hover effects, transitions, and focus states
+         * Used in navbar and hero section
+         */
         .btn {
             display: inline-block;
             font-family: inherit;
@@ -212,15 +240,15 @@
         }
 
         .dev-container .heading {
-            font-family:  Domaine D Nrw;
+            font-family: Domaine D Nrw;
             font-size: 5.5rem;
             line-height: normal;
             margin-bottom: 10px;
             font-weight: 400;
         }
 
-        .dev-container p{
-            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        .dev-container p {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             color: rgb(126, 121, 121);
             font-size: 1.050rem;
             font-weight: 600;
@@ -239,7 +267,12 @@
             align-items: center;
         }
 
-        /* Rubik's Cube Styles */
+        /* ===== 3D Rubik's Cube Animation =====
+         * Creates a 3D rotating cube using CSS transforms
+         * Each face has a 3x3 grid of squares
+         * Continuous rotation animation
+         * Uses perspective for 3D effect
+         */
         .scene {
             width: 200px;
             height: 200px;
@@ -338,6 +371,13 @@
             }
         }
 
+        /* ===== Integration Section Layout =====
+         * Four-row grid layout for:
+         * 1. Title (88px)
+         * 2. Description (100px)
+         * 3. Language icons (110px)
+         * 4. Code display area (600px)
+         */
         .dev-container1 {
             display: grid;
             grid-template-rows: 88px 100px 110px 600px;
@@ -592,6 +632,11 @@
 </head>
 
 <body>
+    <!-- ===== Page Structure =====
+    1. Navbar: Main navigation with dropdowns
+    2. Hero Section: Email for developers intro with 3D cube
+    3. Integration Section: Code examples for different frameworks
+    -->
     <header class="navbar">
         <div class="logo">Resend</div>
         <ul class="main-menu">
@@ -816,7 +861,14 @@
                     <span class="copy-button"><i class="far fa-copy"></i></span>
                 </div>
                 <hr style="border: none; border-top: 1px solid #1c1b1b; margin: 0px;">
+                <!-- ===== Interactive Code Switcher & Clipboard Logic ===== -->
                 <script>
+                    /**
+                     * Main functionality:
+                     * 1. Framework switching with animated indicator
+                     * 2. Code snippet display
+                     * 3. Copy to clipboard with visual feedback
+                     */
                     document.addEventListener('DOMContentLoaded', function () {
                         const boxIcons = document.querySelector('.box-icons');
                         const indicator = document.querySelector('.indicator');
