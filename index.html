@@ -38,23 +38,28 @@
             color: #fff;
             font-family: Arial, sans-serif;
             line-height: 1.5;
-            height: 2000px;
+            height: 2300px;
         }
 
         /* ===== Navbar Container =====
          * Sticky navigation bar with logo, menu items, and action buttons
          * Uses flexbox for layout and contains dropdown menus
          */
+        .navbar-container {
+            position: sticky;
+            background: #000;
+            top: 0;
+            z-index: 2000;
+            border-bottom: solid 1.5px rgba(255, 255, 255, 0.1);
+        }
+
         .navbar {
             margin: 0px 150px;
-            padding-top: 10px;
+            padding: 15px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            background: #000;
-            z-index: 2000;
+            position: relative;
         }
 
         .logo {
@@ -147,15 +152,35 @@
             background: radial-gradient(circle at top left, #222 0%, #111 100%);
             padding: 16px;
             border-radius: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             width: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
         }
 
         .feature-box:hover,
         .feature-box:focus {
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.02);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
             outline: none;
+        }
+
+        .feature-box:hover::after {
+            opacity: 1;
+            transform: rotate(45deg) translateX(50%) translateY(50%);
         }
 
         /* ===== Global Button Styles =====
@@ -215,6 +240,15 @@
             margin: 0px 140px;
             background-color: rgba(0, 0, 0, 0.04);
             min-height: 600px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+            margin-bottom: 400px;
+        }
+
+        .dev-container.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .dev-container .btn-get-started:hover {
@@ -243,6 +277,14 @@
             line-height: normal;
             margin-bottom: 10px;
             font-weight: 400;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease-out 0.2s;
+        }
+
+        .dev-container.animate .heading {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .dev-container p {
@@ -369,6 +411,24 @@
             }
         }
 
+        @keyframes pulse {
+            0% {
+                transform: rotate3d(1, 1, 1, 0deg) scale(1);
+            }
+
+            50% {
+                transform: rotate3d(1, 1, 1, 180deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotate3d(1, 1, 1, 360deg) scale(1);
+            }
+        }
+
+        .cube {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
         /* ===== Integration Section Layout =====
          * Four-row grid layout for:
          * 1. Title (88px)
@@ -382,6 +442,14 @@
             background-color: rgba(0, 0, 0, 0.04);
             margin: 0px 140px;
             min-height: 600px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .dev-container1.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .dev-container1 h1 {
@@ -412,6 +480,58 @@
             background: #000;
             border-radius: 5px;
             margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .dev-container1.animate .intgrate-icons {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dev-container1 .lang-word {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease-out;
+        }
+
+        .dev-container1.animate .lang-word {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Add staggered delay for each language icon */
+        .dev-container1.animate .lang-word:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .dev-container1.animate .lang-word:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .dev-container1.animate .lang-word:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .dev-container1.animate .lang-word:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .dev-container1.animate .lang-word:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
+        .dev-container1.animate .lang-word:nth-child(6) {
+            transition-delay: 0.6s;
+        }
+
+        .dev-container1.animate .lang-word:nth-child(7) {
+            transition-delay: 0.7s;
+        }
+
+        .dev-container1.animate .lang-word:nth-child(8) {
+            transition-delay: 0.8s;
         }
 
         .intgrate-icon {
@@ -601,9 +721,207 @@
             font-size: 14px;
         }
 
-        /* ===== Responsive (optional) ===== */
+        .dev-container3 {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 30px;
+            height: 60vh;
+            width: 90%;
+            margin: 50px;
+            margin-bottom: 30px;
+        }
+
+        .site-footer {
+            background: #000;
+            color: #fff;
+            padding: 60px 0;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.5fr repeat(6, 1fr);
+            gap: 40px;
+        }
+
+        .footer-address {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .address {
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .backed-by {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .yc-logo {
+            height: 20px;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .social-links a {
+            color: #888;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+        }
+
+        .status-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid #333;
+            color: #888;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .status-button:hover {
+            border-color: #555;
+            color: #fff;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #888;
+            border-radius: 50%;
+        }
+
+        .footer-links h3 {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        @media (max-width: 1024px) {
+            .footer-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .footer-address {
+                grid-column: span 4;
+            }
+        }
+
         @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-address {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-address {
+                grid-column: span 1;
+            }
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 1200px) {
+
+            .navbar,
+            .dev-container,
+            .dev-container1 {
+                margin: 0px 40px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .dev-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+                margin-bottom: 200px;
+            }
+
+            .dev-container1 {
+                margin-top: 100px;
+            }
+
+            .dev-container .left-side {
+                padding-left: 0;
+                align-items: center;
+            }
+
+            .dev-container .heading {
+                font-size: 4rem;
+            }
+
+            .dev-container1 h1 {
+                font-size: 3rem;
+            }
+
+            .dev-container1 p {
+                width: 80%;
+            }
+
+            .dev-container1 .intgrate-icons {
+                margin-left: 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-container {
+                position: relative;
+            }
+
             .navbar {
+                margin: 0px 20px;
                 flex-direction: column;
                 gap: 16px;
                 padding: 16px;
@@ -625,6 +943,62 @@
                 padding: 0;
                 gap: 0;
             }
+
+            .dev-container,
+            .dev-container1 {
+                margin: 0px 20px;
+            }
+
+            .dev-container .heading {
+                font-size: 3rem;
+            }
+
+            .dev-container1 .the-box {
+                margin-left: 0;
+            }
+
+            .dev-container1 .box-icons {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dev-container1 .copy-button {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .navbar,
+            .dev-container,
+            .dev-container1 {
+                margin: 0px 10px;
+            }
+
+            .dev-container .heading {
+                font-size: 2.5rem;
+            }
+
+            .dev-container1 h1 {
+                font-size: 2rem;
+            }
+
+            .dev-container1 p {
+                width: 95%;
+                font-size: 1rem;
+            }
+
+            .dev-container1 .box-code {
+                font-size: 12px;
+            }
+
+            .actions {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -635,90 +1009,92 @@
     2. Hero Section: Email for developers intro with 3D cube
     3. Integration Section: Code examples for different frameworks
     -->
-    <header class="navbar">
-        <div class="logo">Resend</div>
-        <ul class="main-menu">
-            <li class="dropdown">
-                <a href="#" aria-haspopup="true">Features ▾</a>
-                <div class="dropdown-content">
-                    <div class="left-menu">
-                        <a href="#">Email API</a>
-                        <a href="#">SMTP Service</a>
-                        <a href="#">Audiences</a>
-                        <a href="#">Broadcasts</a>
+    <header class="navbar-container">
+        <div class="navbar">
+            <div class="logo">Resend</div>
+            <ul class="main-menu">
+                <li class="dropdown">
+                    <a href="#" aria-haspopup="true">Features ▾</a>
+                    <div class="dropdown-content">
+                        <div class="left-menu">
+                            <a href="#">Email API</a>
+                            <a href="#">SMTP Service</a>
+                            <a href="#">Audiences</a>
+                            <a href="#">Broadcasts</a>
+                        </div>
+                        <div class="right-menu">
+                            <div class="feature-box" tabindex="0">Transactional Emails</div>
+                            <div class="feature-box" tabindex="0">Marketing Emails</div>
+                        </div>
                     </div>
-                    <div class="right-menu">
-                        <div class="feature-box" tabindex="0">Transactional Emails</div>
-                        <div class="feature-box" tabindex="0">Marketing Emails</div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" aria-haspopup="true">Company ▾</a>
+                    <div class="dropdown-content">
+                        <div class="left-menu">
+                            <a href="#">About</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Careers</a>
+                            <a href="#">Customers</a>
+                            <a href="#">Humans</a>
+                        </div>
+                        <div class="right-menu">
+                            <div class="feature-box" tabindex="0">Handbook</div>
+                            <div class="feature-box" tabindex="0">Philosophy</div>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#" aria-haspopup="true">Company ▾</a>
-                <div class="dropdown-content">
-                    <div class="left-menu">
-                        <a href="#">About</a>
-                        <a href="#">Blog</a>
-                        <a href="#">Careers</a>
-                        <a href="#">Customers</a>
-                        <a href="#">Humans</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" aria-haspopup="true">Resources ▾</a>
+                    <div class="dropdown-content">
+                        <div class="left-menu">
+                            <a href="#">Changelog</a>
+                            <a href="#">Enterprise</a>
+                            <a href="#">Security</a>
+                            <a href="#">SOC 2</a>
+                            <a href="#">GDPR</a>
+                        </div>
+                        <div class="right-menu">
+                            <div class="feature-box" tabindex="0">Custom Unsubscribe</div>
+                        </div>
                     </div>
-                    <div class="right-menu">
-                        <div class="feature-box" tabindex="0">Handbook</div>
-                        <div class="feature-box" tabindex="0">Philosophy</div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" aria-haspopup="true">Help ▾</a>
+                    <div class="dropdown-content">
+                        <div class="left-menu">
+                            <a href="#">Contact</a>
+                            <a href="#">Support</a>
+                            <a href="#">Status</a>
+                            <a href="#">Migrate</a>
+                        </div>
+                        <div class="right-menu">
+                            <div class="feature-box" tabindex="0">Knowledge Base</div>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#" aria-haspopup="true">Resources ▾</a>
-                <div class="dropdown-content">
-                    <div class="left-menu">
-                        <a href="#">Changelog</a>
-                        <a href="#">Enterprise</a>
-                        <a href="#">Security</a>
-                        <a href="#">SOC 2</a>
-                        <a href="#">GDPR</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" aria-haspopup="true">Docs ▾</a>
+                    <div class="dropdown-content">
+                        <div class="left-menu">
+                            <a href="#">Getting Started</a>
+                            <a href="#">API Reference</a>
+                            <a href="#">Integrations</a>
+                            <a href="#">Examples</a>
+                            <a href="#">SDKs</a>
+                        </div>
+                        <div class="right-menu">
+                            <div class="feature-box" tabindex="0">Quickstart</div>
+                            <div class="feature-box" tabindex="0">API Keys</div>
+                        </div>
                     </div>
-                    <div class="right-menu">
-                        <div class="feature-box" tabindex="0">Custom Unsubscribe</div>
-                    </div>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#" aria-haspopup="true">Help ▾</a>
-                <div class="dropdown-content">
-                    <div class="left-menu">
-                        <a href="#">Contact</a>
-                        <a href="#">Support</a>
-                        <a href="#">Status</a>
-                        <a href="#">Migrate</a>
-                    </div>
-                    <div class="right-menu">
-                        <div class="feature-box" tabindex="0">Knowledge Base</div>
-                    </div>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#" aria-haspopup="true">Docs ▾</a>
-                <div class="dropdown-content">
-                    <div class="left-menu">
-                        <a href="#">Getting Started</a>
-                        <a href="#">API Reference</a>
-                        <a href="#">Integrations</a>
-                        <a href="#">Examples</a>
-                        <a href="#">SDKs</a>
-                    </div>
-                    <div class="right-menu">
-                        <div class="feature-box" tabindex="0">Quickstart</div>
-                        <div class="feature-box" tabindex="0">API Keys</div>
-                    </div>
-                </div>
-            </li>
-            <li><a href="#">Pricing</a></li>
-        </ul>
-        <div class="actions">
-            <button class="btn btn-signin">Sign In</button>
-            <button class="btn btn-get-started">Get Started</button>
+                </li>
+                <li><a href="#">Pricing</a></li>
+            </ul>
+            <div class="actions">
+                <button class="btn btn-signin">Sign In</button>
+                <button class="btn btn-get-started">Get Started</button>
+            </div>
         </div>
     </header>
 
@@ -1069,6 +1445,138 @@
             </div>
         </div>
     </Intgrate>
+
+    <hr
+        style="margin-top: 180px; border-bottom: solid 0.7px #1a1919; background: linear-gradient( rgba(64, 59, 59, 0.1));;">
+    </hr>
+
+    <End>
+        <footer class="site-footer">
+            <div class="footer-container">
+                <!-- Address and Social Column -->
+                <div class="footer-address">
+                    <p class="address">2261 Market Street #5039<br>San Francisco, CA 94114</p>
+                    <div class="backed-by">
+                        <span>Backed by</span>
+                        <img src="https://www.ycombinator.com/assets/ycdc/ycombinator-logo-ee6c80186e783df3f4c69b642c99be0795d3db3fb5b4a1ea0dc3666779bca615.png"
+                            alt="Y Combinator" class="yc-logo">
+                    </div>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <button class="status-button">
+                        <span class="status-dot"></span>
+                        Status unknown
+                    </button>
+                </div>
+
+                <!-- Documentation Links -->
+                <div class="footer-links">
+                    <h3>Documentation</h3>
+                    <ul>
+                        <li><a href="#">Getting Started</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Examples</a></li>
+                        <li><a href="#">SDKs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Links -->
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Changelog</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">SOC 2</a></li>
+                        <li><a href="#">GDPR</a></li>
+                        <li><a href="#">Brand</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Links -->
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Customers</a></li>
+                        <li><a href="#">Humans</a></li>
+                        <li><a href="#">Philosophy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Help Links -->
+                <div class="footer-links">
+                    <h3>Help</h3>
+                    <ul>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Status</a></li>
+                        <li><a href="#">Migrate</a></li>
+                        <li><a href="#">Knowledge Base</a></li>
+                    </ul>
+                </div>
+
+                <!-- Handbook Links -->
+                <div class="footer-links">
+                    <h3>Handbook</h3>
+                    <ul>
+                        <li><a href="#">Why we exist</a></li>
+                        <li><a href="#">How we work</a></li>
+                        <li><a href="#">Engineering</a></li>
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">Success</a></li>
+                        <li><a href="#">Marketing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal Links -->
+                <div class="footer-links">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Acceptable Use</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Subprocessors</a></li>
+                        <li><a href="#">DPA</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </End>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1, // Trigger when at least 10% of the element is visible
+            rootMargin: '0px' // Start animation as soon as element comes into view
+        });
+
+        // Observe elements for scroll animations
+        document.querySelectorAll('.dev-container, .dev-container1').forEach((element) => {
+            observer.observe(element);
+        });
+
+        // Add a subtle parallax effect to the cube
+        window.addEventListener('scroll', () => {
+            const cube = document.querySelector('.cube');
+            const scrolled = window.pageYOffset;
+            cube.style.transform = `rotate3d(1, 1, 1, ${scrolled * 0.2}deg)`;
+        });
+    </script>
 </body>
 
 </html>
